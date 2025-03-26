@@ -23,25 +23,26 @@ app.get("/filters", (req, res) => {
 })
 
 app.post("/resultaat", async (req, res) => {
-    const { weer, reis_type, budget } = req.body;
+    const { vakantie_bestemmingen, vakantie_type, vakantie_budget, vakantie_periode } = req.body;
     
     // Haal jouw AI-resultaat op
-    const bestemming = await AIbestemmingMaker(weer, reis_type, budget);
+    const bestemming = await AIbestemmingMaker(vakantie_bestemmingen, vakantie_type, vakantie_budget, vakantie_periode);
     
     // Redirect met query params
     // encodeURIComponent() zorgt dat speciale karakters juist in de URL belanden
     return res.redirect(
       `/resultaat?bestemming=${encodeURIComponent(bestemming)}`
-      + `&weer=${encodeURIComponent(weer)}`
-      + `&type=${encodeURIComponent(reis_type)}`
-      + `&budget=${encodeURIComponent(budget)}`
+      + `&vakantie_bestemmingen=${encodeURIComponent(vakantie_bestemmingen)}`
+      + `&vakantie_type=${encodeURIComponent(vakantie_type)}`
+      + `&vakantie_budget=${encodeURIComponent(vakantie_budget)}`
+      + `&vakantie_periode=${encodeURIComponent(vakantie_periode)}`
     );
   });
   
   // GET: toont de resultaatpagina
   app.get("/resultaat", (req, res) => {
     // Haal uit de query-string
-    const { bestemming, weer, type, budget } = req.query;
+    const { bestemming, vakantie_bestemmingen, vakantie_type, vakantie_budget, vakantie_periode } = req.query;
     
     // Als er geen data is, stuur bijv. terug naar filters
     if (!bestemming) {
@@ -50,14 +51,15 @@ app.post("/resultaat", async (req, res) => {
   
     res.render("resultaat.ejs", {
       bestemming,
-      weer,
-      type,
-      budget
+      vakantie_bestemmingen,
+      vakantie_type,
+      vakantie_budget,
+      vakantie_periode
     });
   });
 
 
-async function AIbestemmingMaker(weer, type, budget) {
+async function AIbestemmingMaker(vakantie_bestemmingen, vakantie_type, vakantie_budget, vakantie_periode) {
     try {
       const response = await client.chat.completions.create({
         model: 'gpt-4',
@@ -65,9 +67,12 @@ async function AIbestemmingMaker(weer, type, budget) {
           {
             role: 'user',
             content: `geef mij de ideale bestemming gebaseerd op de volgende filters: 
-                      Het type weer: ${weer}, 
-                      Wat voor soort vakantie: ${type}, 
-                      Het budget voor de vakantie: ${budget}`,
+                      Binnen of buiten europa: ${vakantie_bestemmingen}, 
+                      Wat voor soort vakantie: ${vakantie_type}, 
+                      Het budget voor de vakantie: ${vakantie_budget}, 
+                      De periode van de vakantie: ${vakantie_periode}
+                      `,
+                      
           },
         ],
       });
