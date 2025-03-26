@@ -9,10 +9,6 @@ const client = new OpenAI({
      apiKey: process.env.OPENAI_API_KEY // This is also the default, can be omitted
 });
 
-console.log("hostname: " + process.env.HOST_NAME );
-console.log("DATABASE: " + process.env.DATABASE )
-console.log("USERNAME: " + process.env.USER_NAME )
-console.log("PASSWORD: " + process.env.PASSWORD )
 
 const db = new pg.Client({
     connectionString: process.env.DATABASE_URL,
@@ -74,13 +70,16 @@ app.post("/resultaat", async (req, res) => {
 
 
 async function AIbestemmingMaker(vakantie_bestemmingen, vakantie_type, vakantie_budget, vakantie_periode) {
-    try {
-        const res = await db.query("INSERT INTO vakantie_logs (bestemming, type, budget, periode) VALUES ($1, $2, $3, $4) RETURNING *",[vakantie_bestemmingen, vakantie_type, vakantie_budget, vakantie_periode] );
-        console.log('Insert result:', res.rows[0]);
-    } catch (error) {
-        console.log(`error tijens database query : ${error}`)
-    }
-    
+    const result = await db.query('SELECT * FROM vakantie_logs WHERE bestemming=$1 AND type=$2 AND budget=$3 AND periode=$4', [vakantie_bestemmingen, vakantie_type, vakantie_budget, vakantie_periode]);
+
+    // Met pg gebruik je rowCount of result.rows.length
+    const hasResults = result.rowCount > 0; 
+    console.log(hasResults);
+
+    if(hasResults == true) {
+        const response = await db.query('SELECT response FROM vakantie_logs WHERE bestemming=$1 AND type=$2 AND budget=$3 AND periode=$4', [vakantie_bestemmingen, vakantie_type, vakantie_budget, vakantie_periode]);
+        return result.rows[0].response
+    } else {
     try {
       const response = await client.chat.completions.create({
         model: 'gpt-4',
@@ -97,12 +96,19 @@ async function AIbestemmingMaker(vakantie_bestemmingen, vakantie_type, vakantie_
           },
         ],
       });
+      try {
+        const res = await db.query("INSERT INTO vakantie_logs (bestemming, type, budget, periode, response) VALUES ($1, $2, $3, $4, $5) RETURNING *",[vakantie_bestemmingen, vakantie_type, vakantie_budget, vakantie_periode, response.choices[0].message.content.trim()] );
+        console.log('Insert result:', res.rows[0]);
+    } catch (error) {
+        console.log(`error tijens database query : ${error}`)
+    }
       return response.choices[0].message.content.trim();
     } catch (error) {
       console.error('Error with OpenAI Chat Completion:', error);
       throw error;
     }
   }
+}
 
 
 
