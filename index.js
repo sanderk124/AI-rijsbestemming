@@ -1,12 +1,26 @@
 import express from "express";
 import bodyParser from "body-parser";
 import OpenAI from "openai";
-import 'dotenv/config';
+import dotenv from 'dotenv';
+dotenv.config();
+import pg from "pg";
 
 const client = new OpenAI({
      apiKey: process.env.OPENAI_API_KEY // This is also the default, can be omitted
 });
 
+console.log("hostname: " + process.env.HOST_NAME );
+console.log("DATABASE: " + process.env.DATABASE )
+console.log("USERNAME: " + process.env.USER_NAME )
+console.log("PASSWORD: " + process.env.PASSWORD )
+
+const db = new pg.Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
+  db.connect();
 const app = express();
 const port = 3000
 app.use(express.urlencoded({ extended: true }));
@@ -60,6 +74,13 @@ app.post("/resultaat", async (req, res) => {
 
 
 async function AIbestemmingMaker(vakantie_bestemmingen, vakantie_type, vakantie_budget, vakantie_periode) {
+    try {
+        const res = await db.query("INSERT INTO vakantie_logs (bestemming, type, budget, periode) VALUES ($1, $2, $3, $4) RETURNING *",[vakantie_bestemmingen, vakantie_type, vakantie_budget, vakantie_periode] );
+        console.log('Insert result:', res.rows[0]);
+    } catch (error) {
+        console.log(`error tijens database query : ${error}`)
+    }
+    
     try {
       const response = await client.chat.completions.create({
         model: 'gpt-4',
