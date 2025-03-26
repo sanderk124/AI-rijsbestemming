@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>Jullie reis</title>
-  <link rel="stylesheet" href="/styles.css"> 
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <main class="result-container">
+  <div class="container">
     <h2>Jullie ideale groepsreis is:</h2>
-    <p><strong><%= locals.bestemming %></strong>
-        <br>
-        <br>
-    <p>gekozen filers: </p>
-    <p><%= locals.weer %></p>
-    <p><%= locals.type %></p>
-    <p>€<%= locals.budget %></p>
+    <p><strong><%= locals.bestemming %></strong></p>
+
     <br>
+    <p>Gekozen filters:</p>
+    <p>Weer: <%= locals.weer %></p>
+    <p>Type: <%= locals.type %></p>
+    <p>Budget: €<%= locals.budget %></p>
+
     <br>
     <a href="/" class="cta-button">Terug naar home</a>
-  </main>
+  </div>
 </body>
 </html>
