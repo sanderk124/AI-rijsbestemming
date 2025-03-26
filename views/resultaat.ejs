@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Jullie reis</title>
+  <link rel="stylesheet" href="/styles.css"> 
+</head>
+<body>
+  <main class="result-container">
+    <h2>Jullie ideale groepsreis is:</h2>
+    <p><strong><%= locals.bestemming %></strong>
+        <br>
+        <br>
+    <p>gekozen filers: </p>
+    <p><%= locals.weer %></p>
+    <p><%= locals.type %></p>
+    <p>€<%= locals.budget %></p>
+    <br>
+    <br>
+    <a href="/" class="cta-button">Terug naar home</a>
+  </main>
+</body>
+</html>

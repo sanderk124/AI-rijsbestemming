@@ -1,0 +1,75 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  
+  /* Home */
+  header {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+  }
+  
+  header h1 {
+    font-size: 2em;
+    margin-bottom: 40px;
+  }
+  
+  .cta-button {
+    background-color: #fff;
+    color: #0072ff;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Formulier */
+  .form-container {
+    max-width: 500px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  }
+  
+  .form-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 15px;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Resultaat */
+  .result-container {
+    text-align: center;
+    margin-top: 100px;
+  }
+  

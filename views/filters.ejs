@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Filter jouw groepsreis</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="form-container">
+    <h2>Wat zoek jij in een vakantie?</h2>
+    <form action="/resultaat" method="POST">
+      <label>
+        Wat voor soort reis wil je?
+        <select name="reis_type">
+          <option value="Relax">Relax</option>
+          <option value="Sportief">Sportief</option>
+        </select>
+      </label>
+
+      <label>
+        Wat voor weer wilt u?
+        <select name="weer">
+          <option value="Mooi weer">Mooi weer</option>
+          <option value="Koud">Koud</option>
+        </select>
+      </label>
+      
+      <label>
+        Budget per persoon:
+        <input type="number" name="budget" placeholder="Bijv. 500">
+      </label>
+
+      <button type="submit" class="cta-button">Genereer reis</button>
+    </form>
+  </main>
+</body>
+</html>
