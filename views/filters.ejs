@@ -2,54 +2,82 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>Filter jouw groepsreis</title>
+  <title>Filter jouw groepsreis | CheapTickets.nl</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Wat zoek jij in een vakantie?</h2>
-    <form action="/resultaat" method="POST">
-      <label>
-        Wat voor soort reis wil je?
-        <select name="vakantie_bestemmingen">
-          <option value="Binnen Europa">Binnen Europa</option>
-          <option value="Buiten Europa">Buiten Europa</option>
-        </select>
-      </label>
+  <header class="main-header">
+    <div class="nav-container">
+      <div class="logo">CheapTickets.nl</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#">Vliegtickets</a></li>
+          <li><a href="#">Hotels</a></li>
+          <li><a href="#">Autoverhuur</a></li>
+          <li><a href="#">Groepsreizen</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-      <label>
-        Wat voor weer wilt u?
-        <select name="vakantie_type">
-          <option value="Stedentrip">Stedentrip</option>
-          <option value="Natuur/bergen">Natuur/bergen</option>
-          <option value="Historsch">Historisch</option>
-          <option value="Strand">Strand</option>
-          <option value="Wintersport">Wintersport</option>
-          <option value="cultuur">cultuur</option>
-        </select>
-      </label>
+  <main>
+    <section class="container">
+      <h2>Wat zoek jij in een vakantie?</h2>
+      <form action="/resultaat" method="POST">
+        <label>
+          Wat voor soort reis wil je?
+          <select name="vakantie_bestemmingen">
+            <option value="Binnen Europa">Binnen Europa</option>
+            <option value="Buiten Europa">Buiten Europa</option>
+          </select>
+        </label>
 
-      <label>
-        Budget:
-        <select name="vakantie_budget">
+        <label>
+          Wat voor weer wil je?
+          <select name="vakantie_type">
+            <option value="Stedentrip">Stedentrip</option>
+            <option value="Natuur/bergen">Natuur/bergen</option>
+            <option value="Historisch">Historisch</option>
+            <option value="Strand">Strand</option>
+            <option value="Wintersport">Wintersport</option>
+            <option value="Cultuur">Cultuur</option>
+          </select>
+        </label>
+
+        <label>
+          Budget:
+          <select name="vakantie_budget">
             <option value="Onder 200 euro">Onder €200</option>
             <option value="200 tot 600 euro">€200 tot €600</option>
             <option value="600 tot 900 euro">€600 tot €900</option>
             <option value="meer dan 900 euro">Meer dan €900</option>
-        </select>
-      </label>
-      <label>
-        Periode:
-        <select name="vakantie_periode">
+          </select>
+        </label>
+
+        <label>
+          Periode:
+          <select name="vakantie_periode">
             <option value="Weekend">Weekend</option>
             <option value="Doordeweeks">Doordeweeks</option>
             <option value="Alleen vakantie periode">Alleen vakantie periode</option>
             <option value="Flexibel">Flexibel</option>
-        </select>
-      </label>
+          </select>
+        </label>
 
-      <button type="submit" class="cta-button">Genereer reis</button>
-    </form>
-  </div>
+        <button type="submit" class="cta-button">Genereer reis</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-container">
+      <p>&copy; 2025 CheapTickets.nl – Alle rechten voorbehouden</p>
+      <ul class="footer-links">
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Veelgestelde vragen</a></li>
+        <li><a href="#">Privacyverklaring</a></li>
+      </ul>
+    </div>
+  </footer>
 </body>
 </html>

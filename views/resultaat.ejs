@@ -2,23 +2,53 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>Jullie reis</title>
+  <title>Jullie reis | CheapTickets.nl</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Jullie ideale groepsreis is:</h2>
-    <p><strong><%= locals.bestemming %></strong></p>
+  <div class="page-wrapper">
+  <header class="main-header">
+    <div class="nav-container">
+      <div class="logo">CheapTickets.nl</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#">Vliegtickets</a></li>
+          <li><a href="#">Hotels</a></li>
+          <li><a href="#">Autoverhuur</a></li>
+          <li><a href="#">Groepsreizen</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <br>
-    <p>Gekozen filters:</p>
-    <p>Binnen of buiten europa: <%= locals.vakantie_bestemmingen %></p>
-    <p>Type: <%= locals.vakantie_type %></p>
-    <p>Budget: <%= locals.vakantie_budget %></p>
-    <p>Periode: <%= locals.vakantie_periode %></p>
+  <main>
+    <section class="container">
+      <h2>Jullie ideale groepsreis is:</h2>
+      <p><strong><%= bestemming %></strong></p>
 
-    <br>
-    <a href="/" class="cta-button">Terug naar home</a>
-  </div>
+      <br>
+      <p>Gekozen filters:</p>
+      <p>Binnen of buiten Europa: <%= vakantie_bestemmingen %></p>
+      <p>Type: <%= vakantie_type %></p>
+      <p>Budget: <%= vakantie_budget %></p>
+      <p>Periode: <%= vakantie_periode %></p>
+
+      <br>
+      <a href="/" class="cta-button">Terug naar home</a>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-container">
+      <p>&copy; 2025 CheapTickets.nl – Alle rechten voorbehouden</p>
+      <ul class="footer-links">
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Veelgestelde vragen</a></li>
+        <li><a href="#">Privacyverklaring</a></li>
+      </ul>
+    </div>
+  </footer>
+</div>
+
 </body>
 </html>
